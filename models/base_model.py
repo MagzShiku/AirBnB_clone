@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-this is a base model. It defines all common attributes/methods
+This is a base model module. It defines all common attributes/methods
 for other classes
 """
 
@@ -11,7 +11,7 @@ import uuid
 class BaseModel:
     def __init__(self, *args, **kwargs):
         """
-        generate a unique id usin uuid.uuid4()
+        This method generate a unique id using uuid.uuid4()
         -> You can use uuid.uuid4() to generate unique id but don’t
         forget to convert to a string.
         -> The goal is to have unique id for each BaseModel
@@ -22,17 +22,19 @@ class BaseModel:
         """
 
         if kwargs:
-            # iterate ove the key_value pairs in kwargs
+            # Iterate over the key_value pairs in kwargs
             for key, value in kwargs.items():
                 
                 # skip the __class__ attribute
                 if key == '__class__':
                     continue
-                # convert the created and updated intp datetime objects
-                # this helps them be easier to work with and
-                # compatible with program
+                # Convert the created and updated datetime objects
+                # This helps them be easier to work with and
+                # compatible with the program
                 if key in ['created_at', 'updated_at']:
                     value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                # The datetime.strptime() method returns a datetime object
+                # that matches the date_string parsed by the format
                 
                 # set the attribute on the instance
                 setattr(self, key, value)
@@ -48,21 +50,22 @@ class BaseModel:
 
     def __str__(self):
         """
-        return a string representation of the instance
+        This method returns a string representation of the instance
         """
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
                 self.__dict__)
 
     def save(self):
         """
-        update the 'updated' attribute to the current datetime
+        This save method saves the 'updated' attribute to the current datetime
         """
         self.updated_at = datetime.now()
 
     def to_dict(self):
         """
-        creating a copy of the dictionary of the attributes of the instance
-        attr_dict is the data for the created at and the updated at attr
+        This method is creating a copy of the dictionary of the
+        attributes of the instance attr_dict is the data for the
+        created at and the updated at attr
         """
         attr_dict = self.__dict__.copy()
 
