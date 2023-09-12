@@ -15,12 +15,12 @@
 
 # this is the code for creating the command line interpreteri:
 
-import cmd
+	import cmd
 
-class Airbnb1cmd(cmd.Cmd):
-	prompt = "(AirbnbJM) "
+	class Airbnb1cmd(cmd.Cmd):
+		prompt = "(AirbnbJM) "
 
-Airbnb1cmd().cmdloop()
+	Airbnb1cmd().cmdloop()
 
 
 # the command line Interprettershouls be able to:
@@ -29,3 +29,39 @@ Airbnb1cmd().cmdloop()
 	# Do operations on objects (Count, compute stats, etc...)
 	# Update attributes of an object
 	# Destroy an object
+
+# Our Shell will work like this in interactive mode:
+	$ ./console.py
+	(hbnb) help
+	
+	Documented commands (type help <topic>):
+	========================================
+	EOF  help  quit
+	
+	(hbnb) 
+	(hbnb) 
+	(hbnb) quit
+	$
+
+# and like this in non-interactive mode:
+	$ echo "help" | ./console.py
+	(hbnb)
+
+	Documented commands (type help <topic>):
+	========================================
+	EOF  help  quit
+	(hbnb) 
+	$
+	$ cat test_help
+	help
+	$
+	$ cat test_help | ./console.py
+	(hbnb)
+
+	Documented commands (type help <topic>):
+	========================================
+	EOF  help  quit
+	(hbnb) 
+	$
+
+# All tests should also pass in non-interactive mode: $ echo "python3 -m unittest discover tests" | bash
