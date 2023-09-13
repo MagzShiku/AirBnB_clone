@@ -17,12 +17,14 @@ class TestReview(unittest.TestCase):
         are initialized correctly
         """
         item = Review()  # Create an instance of the Review class
-        # Check if the attributes of the Review object are initialized correctly
-        self.assertEqual(item.text, "")  # Check if 'text' attribute is an empty string
+        # Check if the attributes of the Review object are
+        # initialized correctly
+        self.assertEqual(item.text, "")  # Check if 'text' attribute
+        # is an empty string
         self.assertEqual(item.place_id, "")  # Check if 'place_id' attribute
         # is an empty string
-        self.assertEqual(item.user_id, "")  # Check if 'user_id' attribute is an
-        # empty string
+        self.assertEqual(item.user_id, "")  # Check if 'user_id' attribute is
+        # an empty string
 
 
 if __name__ == "__main__":
