@@ -12,7 +12,8 @@ BaseModel = base_model.BaseModel
 
 class TestBase(unittest.TestCase):
     """
-    This is the TestBase class
+    This is the TestBase class, a subclass in the unittest
+    that contains the individual test methods
     """
 
     def test_init(self):
@@ -39,7 +40,7 @@ class TestBase(unittest.TestCase):
         for item in base_list:
             if item in base_str:
                 i += 1
-        self.assertEqual(3, count)
+        self.assertEqual(3, count)  # fix the int later
 
     def test_kwargs(self):
         """
@@ -59,7 +60,8 @@ class TestBase(unittest.TestCase):
         base_class = BaseModel(__class__='Test', id="")  # fix the id later
         self.assertEqual(type(base_class), BaseModel)
 
-    @mock.patch('models.storage')
+    @mock.patch('models.storage')  # This decorater mocks some parts of the
+    # code, allowing the tests to isolate and focus on specific functionality
     def test_to_dict(self):
         """
         This method tests the dictionary conversion and creates new
@@ -113,3 +115,5 @@ class TestBase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+# ensures that the tests run only when the script is executed directly
+# not when it is imported
