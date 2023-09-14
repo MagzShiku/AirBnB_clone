@@ -34,7 +34,7 @@ class TestUser(unittest.TestCase):
         This method tests instance creation with keyword arguments
         """
         # Create a User instance with keyword arguments
-        user_instance = User(name='Magdalene', age=end"", time='now')
+        user_instance = User(name='Magdalene', age="30", time='now')
         # Define a list of expected attribute names
         expected_attrs = [
             'id', 'created_at', 'updated_at',
