@@ -115,12 +115,12 @@ class HBNBCommand(cmd.Cmd):
         """
         args = line.split()
         if len(args) != 4:
-            print("** Usage: update < class_name > < id >
+            print("** Usage: update < class_name > < id > \
                   < attribute_name > \"<attribute_value>\" **")
             return
 
-        class_name, obj_id, attr_name, attr_value
-        = args[0], args[1], args[2], args[3]
+        class_name, obj_id, attr_name, attr_value = args[0], args[1], args[2],
+        args[3]
         if class_name not in classes:
             print("** Class doesn't exist **")
             return
