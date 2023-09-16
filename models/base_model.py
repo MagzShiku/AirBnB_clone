@@ -8,6 +8,8 @@ from datetime import datetime
 import uuid
 from models import storage
 
+classes = {}
+
 class BaseModel:
     def __init__(self, *args, **kwargs):
         """
