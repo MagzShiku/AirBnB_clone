@@ -10,6 +10,7 @@ from models import storage
 
 classes = {}
 
+
 class BaseModel:
     def __init__(self, *args, **kwargs):
         """
@@ -72,6 +73,7 @@ class BaseModel:
         # now we return dictionary with updated data... attr_dict
         return attr_dict
 
+
 """
 Create an instance of the BaseModel class
 """
@@ -84,4 +86,4 @@ Call the to_dict() method to convert the instance attributes to a dictionary
 base_model_dict = base_model.to_dict()
 
 # print the directory representation
-#print(base_model_dict)
+# print(base_model_dict)
