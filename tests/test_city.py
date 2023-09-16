@@ -20,7 +20,3 @@ class TestCity(unittest.TestCase):
         item = City()
         self.assertEqual(item.name, "")
         self.assertEqual(item.state_id, "")
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -19,8 +19,5 @@ class TestAmenity(unittest.TestCase):
         name
         """
         item = Amenity()
-        self.assertEqual(item.name, "")
+        self.assertEqual(item.item, "")
 
-
-if __name__ == "__main__":
-    unittest.main()
