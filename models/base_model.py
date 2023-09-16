@@ -16,6 +16,9 @@ it'll be imported by concole.py
 
 
 class BaseModel:
+    """
+    This is the maon base model for the project, the other classes will be calling this
+    """
     def __init__(self, *args, **kwargs):
         """
         Initializes a new instance of the BaseModel class with the provided arguments.
@@ -64,7 +67,6 @@ class BaseModel:
             None
         """
         self.updated_at = datetime.now()
-        # this uses the storage method
         storage.save()
 
     def to_dict(self):
