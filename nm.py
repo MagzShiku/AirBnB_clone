@@ -1,6 +1,8 @@
+#!/usr/bin/python3
 from datetime import datetime
 import uuid
 from models import storage
+
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
@@ -18,7 +20,8 @@ class BaseModel:
                 setattr(self, key, value)
 
     def __str__(self):
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
+                                     self.__dict__)
 
     def save(self):
         self.updated_at = datetime.now()
@@ -30,6 +33,7 @@ class BaseModel:
         attr_dict['created_at'] = self.created_at.isoformat()
         attr_dict['updated_at'] = self.updated_at.isoformat()
         return attr_dict
+
 
 base_model = BaseModel(my_number=89, name="My_First_Model")
 base_model_dict = base_model.to_dict()
