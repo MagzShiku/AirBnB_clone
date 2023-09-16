@@ -20,4 +20,3 @@ class TestAmenity(unittest.TestCase):
         """
         item = Amenity()
         self.assertEqual(item.item, "")
-
