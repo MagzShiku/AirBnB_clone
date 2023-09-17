@@ -6,7 +6,7 @@ for other classes
 
 from datetime import datetime
 import uuid
-from models import storage
+import models
 
 classes = {}
 """
@@ -41,6 +41,7 @@ class BaseModel:
         self.updated_at = self.created_at
 
         if kwargs:
+            from models import storage
             storage.new(self)
             for key, value in kwargs.items():
                 if key == '__class__':
@@ -66,6 +67,7 @@ class BaseModel:
         Returns:
             None
         """
+         
         self.updated_at = datetime.now()
         storage.save()
 
@@ -100,3 +102,4 @@ base_model_dict = base_model.to_dict()
 
 # print the directory representation
 # print(base_model_dict)
+base_model.save()

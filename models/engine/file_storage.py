@@ -6,18 +6,20 @@ JSON file to instances
 
 
 import json
-
+from models.base_model import BaseModel
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class FileStorage:
     """
     serializes instances to a JSON file and deserializes JSON file to
     instances
     """
-    # __file_path: String to json file
+    
     __file_path = "file.json"
-    # __objects: dictionary - empty but will store all objects by
-    # <class name>.id (ex: to store a BaseModel object with id=12121212,
-    # the key will be BaseModel.12121212)
     __objects = {}
 
     def all(self):
@@ -31,7 +33,7 @@ class FileStorage:
         a public instance method
         sets in __objects the obj with key <obj class name>.id
         """
-        key = f"{obj.__class__.__name__}.{obj.id}"
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
 
     def save(self):
