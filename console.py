@@ -44,66 +44,50 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
         except NameError:
-            print("** Class doesn't exist **")
+            print("** class doesn't exist **")
 
     # Editing this method
-    def do_show(self, line):
+    def do_show(self, arg):
         """
         This method prints the string representation of an instance
 
         Usage: show <class_name> <id>
         """
-        if not line:
+        if not arg:
             print("** class name missing **")
             return
-
-        args = line.split()
-        class_name = args[0]
-        if class_name not in self.classes:
-            print("** Class doesn't exist **")
-            return
-
+        args = arg.split()
         if len(args) < 2:
             print("** instance id missing **")
             return
-
-        instance_id = args[1]
-        key = "{}.{}".format(class_name, instance_id)
-
-        if key in storage.all():
-            print(storage.all()[key])
-
-        else:
+        try:
+            instance = storage.all().get(f"{args[0]}.{args[1]}")
+            if instance:
+                print(instance)
+            else:
+                print("** no instance found **")
+        except KeyError:
             print("** no instance found **")
 
-    def do_destroy(self, line):
+    def do_destroy(self, arg):
         """
         This method deletes an instance
 
         Usage: destroy <class_name> <id>
         """
-        if not line:
+        if not arg:
             print("** class name missing **")
             return
-
-        args = line.split()
-        class_name = args[0]
-        if class_name not in self.classes:
-            print("** class doesn't exist **")
-            return
-
-        if len(args) < 2:
+        args = arg.split()
+        if len(args) < 1:
             print("** instance id missing **")
             return
-
-        instance_id = args[1]
-        key = "{}.{}".format(class_name, instance_id)
-
-        if key in storage.all():
-            del storage.all()[key]
+        try:
+            instance = storage.all()[f"{args[0]}.{args[1]}"]
+            del storage.all()[f"{args[0]}.{args[1]}"]
             storage.save()
-        else:
-            print("** No instance found **")
+        except KeyError:
+            print("** no instance found **")
 
     def do_all(self, line):
         """
@@ -120,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             class_name = args[0]
             if class_name not in self.classes:
-                print("** Class doesn't exist **")
+                print("** class doesn't exist **")
                 return
 
             for obj in storage.all().values():
@@ -129,32 +113,31 @@ class HBNBCommand(cmd.Cmd):
 
         print(all_instances)
 
-    def do_update(self, line):
+    def do_update(self, arg):
         """
         This method updates an instance by adding or updating an attribute
 
         Usage: update <class_name> <id> <attribute_name> "<attribute_value>"
         """
-        args = line.split()
-        if len(args) != 4:
-            print("** Usage: update < class_name > < id > \
-                  < attribute_name > \"<attribute_value>\" **")
+        if not arg:
+            print("** class name missing **")
             return
-
-        class_name, obj_id, attr_name, attr_value = args[0], args[1], args[2],
-        args[3]
-        if class_name not in self.classes:
-            print("** Class doesn't exist **")
+        args = arg.split()
+        if len(args) < 2:
+            print("** instance id missing **")
             return
-
-        obj_key = class_name + "." + obj_id
-        if obj_key not in storage.all():
-            print("** No instance found **")
-            return
-
-        obj = storage.all()[obj_key]
-        setattr(obj, attr_name, attr_value)
-        obj.save()
+        try:
+            instance = storage.all()[f"{args[0]}.{args[1]}"]
+            if len(args) < 3:
+                print("** attribute name missing **")
+                return
+            if len(args) < 4:
+                print("** value missing **")
+                return
+            setattr(instance, args[2], eval(args[3]))
+            instance.save()
+        except KeyError:
+            print("** no instance found **")
 
     def do_count(self, line):
         """
