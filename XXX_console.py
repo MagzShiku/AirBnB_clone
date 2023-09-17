@@ -32,25 +32,22 @@ class HBNBCommand(cmd.Cmd):
         "Review": Review
     }
 
-    def do_create(self, line):
+    def do_create(self, arg):
         """
         This method creates a new instance of an object
 
         Usage: create <class_name>
         """
-        if not line:
+        if not arg:
             print("** Missing class name **")
             return
-
-        args = line.split()  # Edit
-        class_name = args[0]
-        if class_name not in self.classes:
-            print("** Class doesn't exist **")
-            return
-
-        new_instance = self.classes[class_name]()
-        new_instance.save()
-        print(new_instance.id)
+        try:
+            class_name = arg.split()[0]
+            new_instance = eval(class_name)()
+            new_instance.save()
+            print(new_instance.id)
+        except NameError:
+            print("** class doesn't exist **")
 
     # Editing this method
     def do_show(self, line):
