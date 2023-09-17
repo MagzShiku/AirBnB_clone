@@ -6,19 +6,14 @@ JSON file to instances
 
 
 import json
-#from models.base_model import BaseModel
-#from models.place import Place
-#from models.state import State
-#from models.city import City
-#from models.amenity import Amenity
-#from models.review import Review
+
 
 class FileStorage:
     """
     serializes instances to a JSON file and deserializes JSON file to
     instances
     """
-    
+
     __file_path = "file.json"
     __objects = {}
 
