@@ -5,9 +5,14 @@ This module provides a command line interface for the program
 """
 
 import cmd
+from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 from models import storage
-from models.base_model import BaseModel, classes
-from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -16,48 +21,72 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
 
+    classes = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review
+    }
+
     def do_create(self, line):
         """
         This method creates a new instance of an object
 
         Usage: create <class_name>
         """
-        args = line.split()
-        if not args:
+        # args = line.split()
+        if not line:
             print("** Missing class name **")
             return
 
+        args = line.split() # Edit
         class_name = args[0]
-        if class_name not in classes:
+        if class_name not in self.classes:
             print("** Class doesn't exist **")
             return
 
-        new_instance = classes[class_name]()
+        new_instance = self.classes[class_name]()
         new_instance.save()
         print(new_instance.id)
 
+    # Editing this method
     def do_show(self, line):
         """
         This method prints the string representation of an instance
 
         Usage: show <class_name> <id>
         """
-        args = line.split()
-        if len(args) != 2:
-            print("** Usage: show <class_name> <id> **")
+        if not line:
+            print("** class name missing **")
             return
 
-        class_name, obj_id = args[0], args[1]
-        if class_name not in classes:
+        args = line.split() # edit
+        class_name = args[0]
+        if class_name not in self.classes:
             print("** Class doesn't exist **")
             return
 
-        obj_key = class_name + "." + obj_id
-        if obj_key not in storage.all():
-            print("** No instance found **")
+        if len(args) < 2:
+            print("** instance id missing **")
             return
 
-        print(storage.all()[obj_key])
+        instance_id = args[1]
+        key = "{}.{}".format(class_name, instance_id)
+
+        if key in storage.all():
+            print(storage.all()[key])
+        else:
+            print("** no instance found **")
+
+        #obj_key = class_name + "." + obj_id
+        #if obj_key not in storage.all():
+         #   print("** No instance found **")
+          #  return
+
+        #print(storage.all()[obj_key])
 
     def do_destroy(self, line):
         """
@@ -65,23 +94,36 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: destroy <class_name> <id>
         """
+        if not line:
+            print("** class name missing **")
+            return        
+
         args = line.split()
-        if len(args) != 2:
-            print("** Usage: destroy <class_name> <id> **")
+        class_name = args[0]
+        if class_name not in self.classes:
+            print("** class doesn't exist **")
             return
 
-        class_name, obj_id = args[0], args[1]
-        if class_name not in classes:
-            print("** Class doesn't exist **")
+        if len(args) < 2:
+            print("** instance id missing **")
             return
 
-        obj_key = class_name + "." + obj_id
-        if obj_key not in storage.all():
+        instance_id = args[1]
+        key = "{}.{}".format(class_name, instance_id)
+
+        if key in storage.all():
+            del storage.all()[key]
+            storage.save()
+        else:
             print("** No instance found **")
-            return
 
-        del storage.all()[obj_key]
-        storage.save()
+        #obj_key = class_name + "." + obj_id
+        #if obj_key not in storage.all():
+         #   print("** No instance found **")
+          #  return
+
+        #del storage.all()[obj_key]
+        #storage.save()
 
     def do_all(self, line):
         """
@@ -97,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
                 all_instances.append(str(obj))
         else:
             class_name = args[0]
-            if class_name not in classes:
+            if class_name not in self.classes:
                 print("** Class doesn't exist **")
                 return
 
@@ -121,7 +163,7 @@ class HBNBCommand(cmd.Cmd):
 
         class_name, obj_id, attr_name, attr_value = args[0], args[1], args[2],
         args[3]
-        if class_name not in classes:
+        if class_name not in self.classes:
             print("** Class doesn't exist **")
             return
 
@@ -146,7 +188,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         class_name = args[0]
-        if class_name not in classes:
+        if class_name not in self.classes:
             print("** Class doesn't exist **")
             return
 
@@ -160,6 +202,7 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: CTRL+D
         """
+        print() # Edit 00
         return True
 
     def do_quit(self, line):

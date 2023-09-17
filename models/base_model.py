@@ -4,9 +4,9 @@ This is a base model module. It defines all common attributes/methods
 for other classes
 """
 
-from datetime import datetime
 import uuid
-import models
+from datetime import datetime
+from models import storage
 
 classes = {}
 """
@@ -39,9 +39,10 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = self.created_at
+        #self.storage = storage
 
         if kwargs:
-            from models import storage
+            #from models import storage
             storage.new(self)
             for key, value in kwargs.items():
                 if key == '__class__':
@@ -67,7 +68,8 @@ class BaseModel:
         Returns:
             None
         """
-         
+        #from models import storage
+        storage.new(self)
         self.updated_at = datetime.now()
         storage.save()
 
