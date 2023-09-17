@@ -4,6 +4,7 @@
 This module provides a command line interface for the program
 """
 
+
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -37,12 +38,11 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: create <class_name>
         """
-        # args = line.split()
         if not line:
             print("** Missing class name **")
             return
 
-        args = line.split() # Edit
+        args = line.split()  # Edit
         class_name = args[0]
         if class_name not in self.classes:
             print("** Class doesn't exist **")
@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        args = line.split() # edit
+        args = line.split()  # edit
         class_name = args[0]
         if class_name not in self.classes:
             print("** Class doesn't exist **")
@@ -81,13 +81,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
-        #obj_key = class_name + "." + obj_id
-        #if obj_key not in storage.all():
-         #   print("** No instance found **")
-          #  return
-
-        #print(storage.all()[obj_key])
-
     def do_destroy(self, line):
         """
         This method deletes an instance
@@ -96,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if not line:
             print("** class name missing **")
-            return        
+            return
 
         args = line.split()
         class_name = args[0]
@@ -116,14 +109,6 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         else:
             print("** No instance found **")
-
-        #obj_key = class_name + "." + obj_id
-        #if obj_key not in storage.all():
-         #   print("** No instance found **")
-          #  return
-
-        #del storage.all()[obj_key]
-        #storage.save()
 
     def do_all(self, line):
         """
@@ -202,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: CTRL+D
         """
-        print() # Edit 00
+        print()  # Edit 00
         return True
 
     def do_quit(self, line):
