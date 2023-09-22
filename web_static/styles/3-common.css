@@ -15,11 +15,11 @@ footer {
 	bottom: 0;
 }
 
-.logo {
+.icon {
 	margin-left: 20px;
 	height: 30px;
 	width: 30px;
-	background-image: url("../images/logo.png");
+	background-image: url("../images/icon.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
