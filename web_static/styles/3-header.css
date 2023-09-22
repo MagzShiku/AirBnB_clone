@@ -1,0 +1,10 @@
+header {
+	background-color: #FF0000;
+	height: 70px;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+header .logo {
+	display: inline-block;
+	vertical-align: middle
+}
