@@ -2,9 +2,23 @@ header {
 	background-color: white;
 	height: 70px;
 	border-bottom: 1px solid #CCCCCC;
+	width: 100%;
+
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
 }
 
 header .logo {
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.logo-text {
+	font-size: 24px;
+	margin-left: 10px;
+	color: #686868;
 }
