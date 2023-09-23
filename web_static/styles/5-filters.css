@@ -28,3 +28,31 @@
 .search-button:hover {
 	opacity: 0.9;
 }
+
+.locations,
+.amenities {
+	width: 25%;
+	height: 100%;
+	border-right: 1px solid #DDDDDD;
+	box-sizing: border-box;
+	flex-direction: column;
+	display: inline-block;
+	padding: 20px;
+	top: 0%;
+	justify-content: center;
+}
+
+.amenities {
+	border-right: none;
+}
+
+h3 {
+	font-weight: 600;
+	margin: 2px 20px;
+}
+
+h4 {
+	font-weight: 400;
+	font-size: 14px;
+	margin: 2px 20px;
+}
